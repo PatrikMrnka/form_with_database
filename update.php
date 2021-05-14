@@ -1,25 +1,16 @@
 <?php
     // připojení do databáze
     include "mySQL/db.php";
+    Connection();
+    // Select();
 
     $querySelect = "SELECT * FROM users";
+    $resultSelect = mysqli_query($connection, $querySelect);
 
-    $result = mysqli_query($connection, $querySelect); // poslání příkazu z $query do databáze $connection
-        if (!$result) { 
-        die("Dotaz do databáze selhal".mysqli_error());
-    }
-
+    // načtení dat z formuláře a dotaz z databáze
     if (isset($_POST["submit"])) {
-        $username = $_POST["username"];
-        $password = $_POST["password"];
-        $id = $_POST["id"];
-
-        $queryUpdate = "UPDATE users SET username='$username', password='$password' WHERE id='$id'";
-
-        $resultUpdate = mysqli_query($connection, $queryUpdate);
-        if (!$resultUpdate) {
-            die("Query selhalo".mysqli_error());
-        }
+        // Update();
+        // Add();
     }
 
 ?>
@@ -41,8 +32,8 @@
         <br>
         <select name="id">
             <?php 
-                while($row = mysqli_fetch_assoc($result)){
-                    $id = $row["id"];
+                while($option = mysqli_fetch_assoc($resultSelect)) {
+                    $id = $option["id"];
                     echo "<option value='$id'>$id</option>";
                 }
             ?>

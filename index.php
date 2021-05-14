@@ -1,27 +1,24 @@
 <?php
     include "mySQL/db.php";
-    /* Vypsání dat z databáze
-    C - create (vytvoř)
-    R - read (přečti)
-    U - update (uprav stávající)
-    D - delete (vymaž)
-    */
+    Connection();
+
+    // $connection = mysqli_connect("localhost", "root", "", "login_application"); // server, login_name, login_password, database_name
     
-    // if(isset($_POST["submit"])) {
-    //     $username = $_POST["username"];
-    //     $password = $_POST["password"];
+    // if ($connection) { // pokud proměnná $connection něco obsahuje, úspěšně jsme se připojili k databázi
+    //     echo "Jsme propojeni s databází";
+    // } else {
+    //     // echo "Oooh, něco se pokazilo";
+    //     echo "Oooh, něco se pokazilo";
+    // }
 
-    //     // ověření, zda $username a $password existují = odeslala data z formuláře
-    //     if ($username && $password) {
-    //         echo $username;
-    //         echo "<br>";
-    //         echo $password;
-    //         echo "<br>";
-    //     } else {
-    //         echo "Něco nám chybí";
-    //     }
+    // $querySelect = "SELECT * FROM users";
 
-        
+    // $resultSelect = mysqli_query($connection, $querySelect);
+
+    // if (!$resultSelect) {
+    //     echo "něco je špatně";
+    // } else {
+    //     echo "vše je v pořádku";
     // }
 ?>
 
@@ -42,21 +39,16 @@
         <br>
         <input type="submit" name="submit" value="Odeslat">
     </form>
+    
+    <?php
 
-    <?php 
-    // while ($row = mysqli_fetch_assoc($result)) {
+    // while($row = mysqli_fetch_assoc($resultSelect)){
+    //     echo "<pre>";
     //     print_r($row);
+    //     echo "</pre>";
     // }
-
-    // while ($row = mysqli_fetch_row($result)) {
-    //     print_r($row);
-    // }
-
-    while ($row = mysqli_fetch_assoc($result)) {
-        echo "<pre>";
-        print_r($row);
-        echo "</pre>";
-    }
+        Select();
     ?>
+
 </body>
 </html>
