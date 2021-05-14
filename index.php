@@ -58,8 +58,18 @@
     </form>
 
     <?php 
+    // while ($row = mysqli_fetch_assoc($result)) {
+    //     print_r($row);
+    // }
+
+    // while ($row = mysqli_fetch_row($result)) {
+    //     print_r($row);
+    // }
+
     while ($row = mysqli_fetch_assoc($result)) {
+        echo "<pre>";
         print_r($row);
+        echo "</pre>";
     }
     ?>
 </body>
