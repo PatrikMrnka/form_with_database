@@ -19,6 +19,9 @@ function Update() { // funkce pro změnu údajů v databázi na určeném ID
     $password = $_POST["password"];
     $id = $_POST["id"];
 
+    $username = mysqli_real_escape_string($connection, $username);
+    $password = mysqli_real_escape_string($connection, $password);
+
     $queryUpdate = "UPDATE users SET username='$username', password='$password' WHERE id = $id";
     $resultUpdate = mysqli_query($connection, $queryUpdate);
 
@@ -32,8 +35,23 @@ function Add() { // funkce pro přidání do databáze (jméno a heslo)
     $username = $_POST["username"];
     $password = $_POST["password"];
 
+    // escapování inputů
+    $username = mysqli_real_escape_string($connection, $username);
+    $password = mysqli_real_escape_string($connection, $password);
+
+    // hashování hesla
+    $hashFormat = "$2y$10$";
+    $salt = "u9YPT1kh13fEPGlMmkWrID";
+    $hasFormat_salt = $hashFormat.$salt;
+    $password = crypt($password, $hasFormat_salt);
+
+    // vložení dat do databáze
     $queryAdd = "INSERT INTO users(username, password) VALUES('$username','$password')"; // proměnná s příkazem vložení dat z $username a $password do databáze SQL
     $resultAdd = mysqli_query($connection, $queryAdd);
+
+    if (!$resultAdd) {
+        echo "Nepodařilo se data zapsat do databáze.";
+    }
 }
 
 function Select() { // funkce pro vypsání celé databáze s parametry
@@ -65,13 +83,14 @@ function Delete() { // funkce pro vymazání určitého objektu z databáze podl
     $password = $_POST["password"];
     $id = $_POST["id"];
 
+    $username = mysqli_real_escape_string($connection, $username);
+    $password = mysqli_real_escape_string($connection, $password);
+
     $queryDelete = "DELETE FROM users WHERE id = $id";
     $resultDelete = mysqli_query($connection, $queryDelete);
 
     if(!$resultDelete) {
         echo "něco je špatně";
     }
-
-
 }
 ?>
