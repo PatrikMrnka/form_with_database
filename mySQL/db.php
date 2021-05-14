@@ -36,7 +36,7 @@ function Add() { // funkce pro přidání do databáze (jméno a heslo)
     $resultAdd = mysqli_query($connection, $queryAdd);
 }
 
-function Select() {
+function Select() { // funkce pro vypsání celé databáze s parametry
     global $connection;
     global $querySelect;
     global $resultSelect;
@@ -56,5 +56,22 @@ function Select() {
         print_r($row);
         echo "</pre>";
     }
+}
+
+function Delete() { // funkce pro vymazání určitého objektu z databáze podle specifického ID
+    global $connection;
+
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+    $id = $_POST["id"];
+
+    $queryDelete = "DELETE FROM users WHERE id = $id";
+    $resultDelete = mysqli_query($connection, $queryDelete);
+
+    if(!$resultDelete) {
+        echo "něco je špatně";
+    }
+
+
 }
 ?>
