@@ -1,6 +1,7 @@
 <?php
 
 function Connection(){ // funkce pro připojení do databáze
+
     // připojení do databáze
     global $connection;
     $connection = mysqli_connect("localhost", "root", "", "login_application"); // server, login_name, login_password, database_name
@@ -8,7 +9,6 @@ function Connection(){ // funkce pro připojení do databáze
     if ($connection) { // pokud proměnná $connection něco obsahuje, úspěšně jsme se připojili k databázi
         echo "Jsme propojeni s databází";
     } else {
-        // echo "Oooh, něco se pokazilo";
         echo "Oooh, něco se pokazilo";
     }
 }
@@ -38,7 +38,6 @@ function Add() { // funkce pro přidání do databáze (jméno a heslo)
 
 function Select() { // funkce pro vypsání celé databáze s parametry
     global $connection;
-    global $querySelect;
     global $resultSelect;
 
     $querySelect = "SELECT * FROM users";
@@ -51,11 +50,12 @@ function Select() { // funkce pro vypsání celé databáze s parametry
         echo "vše je v pořádku";
     }
 
-    while($row = mysqli_fetch_assoc($resultSelect)){
-        echo "<pre>";
-        print_r($row);
-        echo "</pre>";
-    }
+    // while($row = mysqli_fetch_assoc($resultSelect)){
+    //     echo "<pre>";
+    //     print_r($row);
+    //     echo "</pre>";
+    // }
+
 }
 
 function Delete() { // funkce pro vymazání určitého objektu z databáze podle specifického ID

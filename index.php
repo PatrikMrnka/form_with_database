@@ -2,24 +2,9 @@
     include "mySQL/db.php";
     Connection();
 
-    // $connection = mysqli_connect("localhost", "root", "", "login_application"); // server, login_name, login_password, database_name
-    
-    // if ($connection) { // pokud proměnná $connection něco obsahuje, úspěšně jsme se připojili k databázi
-    //     echo "Jsme propojeni s databází";
-    // } else {
-    //     // echo "Oooh, něco se pokazilo";
-    //     echo "Oooh, něco se pokazilo";
-    // }
-
-    // $querySelect = "SELECT * FROM users";
-
-    // $resultSelect = mysqli_query($connection, $querySelect);
-
-    // if (!$resultSelect) {
-    //     echo "něco je špatně";
-    // } else {
-    //     echo "vše je v pořádku";
-    // }
+    if (isset($_POST["submit"])) {
+        Add();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -39,15 +24,16 @@
         <br>
         <input type="submit" name="submit" value="Odeslat">
     </form>
+
+    <p>Chci změnit parametry určitého objektu: <a href="update.php">Update</a></p>
+    <p>Chci vymazat určitý objekt z databáze: <a href="delete.php">Delete</a></p>
     
     <?php
-
-    // while($row = mysqli_fetch_assoc($resultSelect)){
-    //     echo "<pre>";
-    //     print_r($row);
-    //     echo "</pre>";
-    // }
-        Select();
+    while($row = mysqli_fetch_assoc($resultSelect)){
+        echo "<pre>";
+        print_r($row);
+        echo "</pre>";
+    }
     ?>
 
 </body>

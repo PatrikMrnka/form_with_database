@@ -1,11 +1,13 @@
 <?php 
-
+    // načtení funkcí
     include "mySQL/db.php";
+    
+    // napojení na databázi
     Connection();
 
-    $querySelect = "SELECT * FROM users";
-    $resultSelect = mysqli_query($connection, $querySelect);
-
+    // výběr všech dat z databáze
+    Select();
+    
     // kontrola, zda byl formulář odeslán
     if (isset($_POST["submit"])) {
         Delete();
@@ -30,7 +32,7 @@
         <input type="password" name="password" placeholder="Heslo">
         <br>
         <select name="id">
-            <?php 
+            <?php // výpis všech ID do <option>
                 while($option = mysqli_fetch_assoc($resultSelect)) {
                     $id = $option["id"];
                     echo "<option value='$id'>$id</option>";

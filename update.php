@@ -2,15 +2,14 @@
     // připojení do databáze
     include "mySQL/db.php";
     Connection();
-    // Select();
+    // Select(); // výpis všech údajů z databáze
 
-    $querySelect = "SELECT * FROM users";
-    $resultSelect = mysqli_query($connection, $querySelect);
+    // výběr všech dat z databáze
+    Select();
 
     // načtení dat z formuláře a dotaz z databáze
-    if (isset($_POST["submit"])) {
-        // Update();
-        // Add();
+    if (isset($_POST["submit"])) { // jestli byl spuštěn příkaz submit, proveď následující funkci
+        Update(); // funkce pro Update údajů v databázi
     }
 
 ?>
