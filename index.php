@@ -1,17 +1,24 @@
 <?php
-    if(isset($_POST["submit"])) {
-        $username = $_POST["username"];
-        $password = $_POST["password"];
+    /* Vypsání dat z databáze
+    C - create (vytvoř)
+    R - read (přečti)
+    U - update (uprav stávající)
+    D - delete (vymaž)
+    */
+    
+    // if(isset($_POST["submit"])) {
+    //     $username = $_POST["username"];
+    //     $password = $_POST["password"];
 
-        // ověření, zda $username a $password existují = odeslala data z formuláře
-        if ($username && $password) {
-            echo $username;
-            echo "<br>";
-            echo $password;
-            echo "<br>";
-        } else {
-            echo "Něco nám chybí";
-        }
+    //     // ověření, zda $username a $password existují = odeslala data z formuláře
+    //     if ($username && $password) {
+    //         echo $username;
+    //         echo "<br>";
+    //         echo $password;
+    //         echo "<br>";
+    //     } else {
+    //         echo "Něco nám chybí";
+    //     }
 
         // připojení do databáze
         $connection = mysqli_connect("localhost", "root", "", "login_application"); // server, login_name, login_password, database_name
@@ -22,16 +29,14 @@
             // echo "Oooh, něco se pokazilo";
             die("Oooh, něco se pokazilo");
         }
+        // $queryInsert = "INSERT INTO users(username, password) VALUES('$username','$password')"; // proměnná s příkazem vložení dat z $username a $password do databáze SQL
+        $querySelect = "SELECT * FROM users";
 
-        $query = "INSERT INTO users(username, password) VALUES('$username','$password')"; // proměnná s příkazem vložení dat z $username a $password do databáze SQL
-
-        $result = mysqli_query($connection, $query); // poslání příkazu z $query do databáze $connection
-
+        $result = mysqli_query($connection, $querySelect); // poslání příkazu z $query do databáze $connection
         if (!$result) { 
             die("Dotaz do databáze selhal".mysqli_error());
         }
-
-    }
+    // }
 ?>
 
 <!DOCTYPE html>
@@ -43,6 +48,7 @@
     <title>Formulář PHP s databází</title>
 </head>
 <body>
+
     <form action="index.php" method="post">
         <input type="text" name="username" placeholder="Uživatelské jméno">
         <br>
@@ -50,5 +56,11 @@
         <br>
         <input type="submit" name="submit" value="Odeslat">
     </form>
+
+    <?php 
+    while ($row = mysqli_fetch_assoc($result)) {
+        print_r($row);
+    }
+    ?>
 </body>
 </html>
